@@ -1,0 +1,23 @@
+{
+  "name": "weekly-budget",
+  "version": "0.0.0",
+  "homepage": "https://github.com/chrislaughlin/weekly-budget",
+  "authors": [
+    "Chris Laughlin <bluntm@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.1",
+    "angular-route": "~1.3.1"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.3.1"
+  }
+}
