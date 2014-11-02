@@ -1,0 +1,11 @@
+<!-- Main Section -->
+<div ng-controller="WeeksCtrl as wc">
+    <p class="header">Weeks</p>
+    <div class="weeks">
+        <ul>
+            <li ng-repeat="week in wc.weeks">
+                {{week.name}}
+            </li>
+        </ul>
+    </div>
+</div>

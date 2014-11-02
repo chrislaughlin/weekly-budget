@@ -1,12 +1,12 @@
 <!DOCTYPE html>
     <!--[if lt IE 7]>
-    <html lang="en" ng-app="twitterMood" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+    <html lang="en" ng-app="weeklyBudget" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
     <!--[if IE 7]>
-    <html lang="en" ng-app="twitterMood" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+    <html lang="en" ng-app="weeklyBudget" class="no-js lt-ie9 lt-ie8"> <![endif]-->
     <!--[if IE 8]>
-    <html lang="en" ng-app="twitterMood" class="no-js lt-ie9"> <![endif]-->
+    <html lang="en" ng-app="weeklyBudget" class="no-js lt-ie9"> <![endif]-->
     <!--[if gt IE 8]><!-->
-    <html lang="en" ng-app="twitterMood" class="no-js"> <!--<![endif]-->
+    <html lang="en" ng-app="weeklyBudget" class="no-js"> <!--<![endif]-->
     <head>
 
         <meta charset="utf-8">
@@ -40,6 +40,8 @@
 
     <body>
 
+    <div ng-view></div>
+
     <!-- jQuery Version 1.11.0 -->
     <script src="js/jquery-1.11.0.js"></script>
 
@@ -52,6 +54,7 @@
     <!-- Angular JS -->
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="../bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
 
     <!-- Angular Application -->
     <script src="js/app/app.js"></script>
