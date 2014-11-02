@@ -3,9 +3,12 @@
 
 describe('Weeks Module', function () {
 
-    var scope,
-        controller,
+    var scope1,
+        scope2,
+        weeksCtrl,
+        weekCtrl,
         service,
+        routeParams,
         defaultWeeks = [{name: 'Week 1', total:200, transactions:[]}, {name: 'Week 2', total:200,transactions:[]},
             {name: 'Week 3', total:200, transactions:[]}, {name: 'Week 4', total:200, transactions:[]}];
 
@@ -15,23 +18,43 @@ describe('Weeks Module', function () {
     });
 
     beforeEach(inject(function ($rootScope, $controller, Weeks) {
-        scope = $rootScope.$new();
-        controller = $controller('WeeksCtrl', {
-            '$scope': scope
+        scope1 = $rootScope.$new();
+        scope2 = $rootScope.$new();
+        routeParams = {};
+        routeParams.index = 0;
+        weeksCtrl = $controller('WeeksCtrl', {
+            '$scope': scope1
         });
         service = Weeks;
     }));
 
     // CONTROLLER
     it('should have Weeks Controller', inject(function() {
-        //spec body
-        expect(controller).toBeDefined();
+        expect(weeksCtrl).toBeDefined();
     }));
 
     it('should get weeks from service',inject(function() {
         spyOn(service, 'getWeeks').and.returnValue(defaultWeeks);
-        expect(controller.weeks).toEqual(defaultWeeks);
-    }))
+        expect(weeksCtrl.weeks).toEqual(defaultWeeks);
+    }));
+
+    it('should have Week Controller', inject(function($controller) {
+        spyOn(service, 'getWeek').and.returnValue(defaultWeeks[0]);
+        weekCtrl = $controller('WeekCtrl', {
+            '$scope': scope2,
+            '$routeParams': routeParams
+        });
+        expect(weekCtrl).toBeDefined();
+    }));
+
+    it('should return the week', inject(function($controller) {
+        spyOn(service, 'getWeek').and.returnValue(defaultWeeks[0]);
+        weekCtrl = $controller('WeekCtrl', {
+            '$scope': scope2,
+            '$routeParams': routeParams
+        });
+        expect(weekCtrl.week).toEqual(defaultWeeks[0]);
+    }));
 
     // SERVICE
     it('should have Weeks Service', inject(function() {
@@ -47,6 +70,24 @@ describe('Weeks Module', function () {
         spyOn(localStorageService, 'get').and.returnValue(defaultWeeks);
         expect(service.getWeeks()).toEqual(defaultWeeks);
         expect(localStorageService.get).toHaveBeenCalledWith('weeks');
+    }));
+
+    it('should return the week for an index', inject(function(localStorageService) {
+        spyOn(localStorageService, 'get').and.returnValue(defaultWeeks);
+        expect(service.getWeek(0)).toEqual(defaultWeeks[0]);
+    }));
+
+    // FILTERS
+    it('should return the remaining total for the week', inject(function($filter) {
+        var week = {
+            total: 200,
+            transactions: [
+                10,
+                5.50,
+                30
+            ]
+        };
+        expect($filter('remainingTotal')(week)).toEqual(154.5);
     }));
 
 });

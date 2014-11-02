@@ -9,6 +9,7 @@ angular.module('weeklyBudget', [
 ]).config(['$routeProvider', 'localStorageServiceProvider', function ($routeProvider, localStorageServiceProvider) {
     // Routes
     $routeProvider.when('/weeks', {templateUrl: 'partials/weeks.html', controller: 'WeeksCtrl'});
+    $routeProvider.when('/week/:index', {templateUrl: 'partials/week.html'});
     $routeProvider.otherwise({redirectTo: '/weeks'});
 
     //Local Storage

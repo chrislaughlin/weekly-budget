@@ -28,5 +28,7 @@ ul li {
     text-align: center;
     height: 25%;
     padding: 25%;
+    padding-left: 0%;
     font-size: 2em;
+    border-bottom: #000000;
 }
