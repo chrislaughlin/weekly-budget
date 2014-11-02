@@ -6,18 +6,24 @@ function WeeksCtrl(Weeks) {
 }
 
 function WeeksService(localStorageService) {
-    var WEEKS = 'weeks';
+    var _WEEKS = 'weeks';
     var WeeksService = {};
     WeeksService.getWeeks = function() {
-        var weeks = localStorageService.get(WEEKS);
+        var weeks = localStorageService.get(_WEEKS);
         if (!weeks) {
             weeks = [{name: 'Week 1', total:200, transactions:[]}, {name: 'Week 2', total:200,transactions:[]},
                 {name: 'Week 3', total:200, transactions:[]}, {name: 'Week 4', total:200, transactions:[]}];
+            localStorageService.set(_WEEKS, weeks);
         }
         return weeks;
     };
     WeeksService.getWeek = function(index) {
-        return localStorageService.get(WEEKS)[index];
+        return localStorageService.get(_WEEKS)[index];
+    };
+    WeeksService.addTransaction = function(index, transaction) {
+        var weeks = this.getWeeks();
+        weeks[index].transactions.push(transaction);
+        localStorageService.set(_WEEKS, weeks);
     };
 
     return WeeksService;
@@ -35,7 +41,11 @@ function remainingTotal() {
 
 function WeekCtrl(Weeks, $routeParams) {
     this.week = {};
+    this.tranaction = 0;
     this.week = Weeks.getWeek($routeParams.index);
+    this.addTransaction = function(transaction) {
+        Weeks.addTransaction($routeParams.index, transaction);
+    }
 }
 
 angular.module('weeklyBudget.weeks', [])

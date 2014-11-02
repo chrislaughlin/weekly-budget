@@ -56,6 +56,17 @@ describe('Weeks Module', function () {
         expect(weekCtrl.week).toEqual(defaultWeeks[0]);
     }));
 
+    it('should add the transaction to the week', inject(function() {
+        spyOn(service, 'getWeek').and.returnValue(defaultWeeks[0]);
+        spyOn(service, 'addTransaction').and.callFake(function(){return true});
+        weekCtrl = $controller('WeekCtrl', {
+            '$scope': scope2,
+            '$routeParams': routeParams
+        });
+        weekCtrl.addTransaction(10);
+        expect(service.addTransaction).toHaveBeenCalledWith(0, 10);
+    }));
+
     // SERVICE
     it('should have Weeks Service', inject(function() {
         expect(service).toBeDefined();
@@ -75,6 +86,15 @@ describe('Weeks Module', function () {
     it('should return the week for an index', inject(function(localStorageService) {
         spyOn(localStorageService, 'get').and.returnValue(defaultWeeks);
         expect(service.getWeek(0)).toEqual(defaultWeeks[0]);
+    }));
+
+    it('should add transaction to week', inject(function(localStorageService) {
+        spyOn(localStorageService, 'get').and.returnValue(defaultWeeks);
+        spyOn(localStorageService, 'set');
+        var newWeeks = defaultWeeks;
+        newWeeks[0].transactions.push(10);
+        service.addTransaction(0, 10);
+        expect(localStorageService.set).toHaveBeenCalledWith('weeks', newWeeks);
     }));
 
     // FILTERS

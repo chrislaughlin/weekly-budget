@@ -9,10 +9,10 @@ angular.module('weeklyBudget', [
 ]).config(['$routeProvider', 'localStorageServiceProvider', function ($routeProvider, localStorageServiceProvider) {
     // Routes
     $routeProvider.when('/weeks', {templateUrl: 'partials/weeks.html', controller: 'WeeksCtrl'});
-    $routeProvider.when('/week/:index', {templateUrl: 'partials/week.html'});
+    $routeProvider.when('/week/:index', {templateUrl: 'partials/week.html', controller: 'WeekCtrl'});
     $routeProvider.otherwise({redirectTo: '/weeks'});
 
     //Local Storage
-    localStorageServiceProvider
-        .setPrefix('weeklyBudget');
+    //localStorageServiceProvider
+    //    .setPrefix('weeklyBudget');
 }]);

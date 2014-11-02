@@ -1,10 +1,10 @@
 <!-- Main Section -->
-<div ng-controller="WeeksCtrl as wc">
+<div ng-controller="WeeksCtrl as wsc">
     <p class="header">Weeks</p>
     <div class="weeks">
         <ul>
-            <li ng-repeat="week in wc.weeks">
-                <a ng-href="week/{{$index}}">{{week.name}} Remaining: {{week | remainingTotal}}</a>
+            <li ng-repeat="week in wsc.weeks">
+                <a ng-href="#week/{{$index}}">{{week.name}} Remaining: {{week | remainingTotal}}</a>
             </li>
         </ul>
     </div>

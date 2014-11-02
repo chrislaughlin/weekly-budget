@@ -1,3 +1,10 @@
 <div ng-controller="WeekCtrl as wc">
-
+    <h1>{{wc.week.name}}</h1>
+    <a ng-click="wc.addTransaction(transaction)"><h2>ADD</h2></a>
+    <input ng-model="transaction"/>
+    <ul>
+        <li ng-repeat="transaction in wsc.transactions">
+            <h3>transaction</h3>
+        </li>
+    </ul>
 </div>
