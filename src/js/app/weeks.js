@@ -5,6 +5,7 @@ function WeeksCtrl(Weeks) {
     this.weeks = Weeks.getWeeks();
     this.clearData = function() {
         Weeks.clearData();
+        this.weeks = Weeks.getWeeks();
     }
 }
 
