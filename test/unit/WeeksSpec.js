@@ -84,8 +84,8 @@ describe('Weeks Module', function () {
             '$routeParams': routeParams
         });
         expect(weekCtrl.week.transactions.length).toEqual(0);
-        weekCtrl.addTransaction(10);
-        expect(service.addTransaction).toHaveBeenCalledWith(0, 10);
+        weekCtrl.addTransaction('10');
+        expect(service.addTransaction).toHaveBeenCalledWith(0, '10');
         expect(weekCtrl.week.transactions.length).toEqual(1)
         expect(weekCtrl.tranaction).toEqual('');
     }));
@@ -97,6 +97,16 @@ describe('Weeks Module', function () {
             '$routeParams': routeParams
         });
         weekCtrl.addTransaction('');
+        expect(service.addTransaction).not.toHaveBeenCalled();
+    }));
+
+    it('should not add blank values', inject(function($controller) {
+        spyOn(service, 'addTransaction').and.callFake(function(){return true});
+        weekCtrl = $controller('WeekCtrl', {
+            '$scope': scope2,
+            '$routeParams': routeParams
+        });
+        weekCtrl.addTransaction('20.gb');
         expect(service.addTransaction).not.toHaveBeenCalled();
     }));
 
