@@ -45,6 +45,8 @@ function WeekCtrl(Weeks, $routeParams) {
     this.week = Weeks.getWeek($routeParams.index);
     this.addTransaction = function(transaction) {
         Weeks.addTransaction($routeParams.index, transaction);
+        this.week = Weeks.getWeek($routeParams.index);
+        this.tranaction = '';
     }
 }
 

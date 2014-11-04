@@ -9,8 +9,7 @@ describe('Weeks Module', function () {
         weekCtrl,
         service,
         routeParams,
-        defaultWeeks = [{name: 'Week 1', total:200, transactions:[]}, {name: 'Week 2', total:200,transactions:[]},
-            {name: 'Week 3', total:200, transactions:[]}, {name: 'Week 4', total:200, transactions:[]}];
+        defaultWeeks;
 
     beforeEach(function () {
         module('weeklyBudget.weeks');
@@ -26,6 +25,8 @@ describe('Weeks Module', function () {
             '$scope': scope1
         });
         service = Weeks;
+        defaultWeeks = [{name: 'Week 1', total:200, transactions:[]}, {name: 'Week 2', total:200,transactions:[]},
+            {name: 'Week 3', total:200, transactions:[]}, {name: 'Week 4', total:200, transactions:[]}];
     }));
 
     // CONTROLLER
@@ -57,14 +58,30 @@ describe('Weeks Module', function () {
     }));
 
     it('should add the transaction to the week', inject(function($controller) {
-        spyOn(service, 'getWeek').and.returnValue(defaultWeeks[0]);
+        var count  = 0;
+        spyOn(service, 'getWeek').and.callFake(function() {
+            switch(count){
+                case 0:
+                    count++;
+                    return defaultWeeks[0];
+                break;
+                case 1:
+                    var week = defaultWeeks[0];
+                    week.transactions.push(10);
+                    return week;
+                    break;
+            }
+        });
         spyOn(service, 'addTransaction').and.callFake(function(){return true});
         weekCtrl = $controller('WeekCtrl', {
             '$scope': scope2,
             '$routeParams': routeParams
         });
+        expect(weekCtrl.week.transactions.length).toEqual(0);
         weekCtrl.addTransaction(10);
         expect(service.addTransaction).toHaveBeenCalledWith(0, 10);
+        expect(weekCtrl.week.transactions.length).toEqual(1)
+        expect(weekCtrl.tranaction).toEqual('');
     }));
 
     // SERVICE
@@ -74,6 +91,7 @@ describe('Weeks Module', function () {
 
     it('should return an array of weeks if none in local storage', inject(function(localStorageService) {
         spyOn(localStorageService, 'get').and.returnValue(null);
+        var weeks = defaultWeeks;
         expect(service.getWeeks()).toEqual(defaultWeeks);
     }));
 

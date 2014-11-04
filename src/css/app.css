@@ -36,3 +36,15 @@ body {
 
 a { color: inherit; }
 
+.weekContainer {
+    text-align: center;
+}
+
+.add-button {
+    vertical-align: bottom;
+}
+
+.add-button-container {
+    padding-top: 10%;
+    padding-bottom: 10%;
+}
