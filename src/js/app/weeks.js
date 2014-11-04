@@ -50,7 +50,21 @@ function WeekCtrl(Weeks, $routeParams) {
     }
 }
 
+function backButton() {
+    return {
+        restrict: 'A',
+
+        link: function (scope, element, attrs, $location) {
+            element.bind('click', goBack);
+            function goBack() {
+                window.history.back();
+            }
+        }
+    }
+};
+
 angular.module('weeklyBudget.weeks', [])
     .controller('WeeksCtrl', ['Weeks', WeeksCtrl])
     .controller('WeekCtrl', ['Weeks', '$routeParams', WeekCtrl])
-    .service('Weeks', ['localStorageService', WeeksService]).filter('remainingTotal', remainingTotal);
+    .service('Weeks', ['localStorageService', WeeksService]).filter('remainingTotal', remainingTotal)
+    .directive('backButton', backButton);

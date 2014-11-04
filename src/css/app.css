@@ -48,3 +48,7 @@ a { color: inherit; }
     padding-top: 10%;
     padding-bottom: 10%;
 }
+
+.back-button {
+    float: left;
+}

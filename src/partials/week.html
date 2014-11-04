@@ -1,5 +1,10 @@
 <div class="weekContainer" ng-controller="WeekCtrl as wc">
-    <p class="header">{{wc.week.name}}</p>
+    <p class="header">
+        <span class="back-button" back-button>
+            <i class="fa fa-arrow-circle-left"></i>
+        </span>
+        {{wc.week.name}}
+    </p>
 
     <div class="add-button-container">
         <a ng-click="wc.addTransaction(transaction)"><i class="fa fa-plus-circle fa-2x"></i></a>
