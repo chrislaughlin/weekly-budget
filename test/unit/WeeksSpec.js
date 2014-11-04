@@ -56,7 +56,7 @@ describe('Weeks Module', function () {
         expect(weekCtrl.week).toEqual(defaultWeeks[0]);
     }));
 
-    it('should add the transaction to the week', inject(function() {
+    it('should add the transaction to the week', inject(function($controller) {
         spyOn(service, 'getWeek').and.returnValue(defaultWeeks[0]);
         spyOn(service, 'addTransaction').and.callFake(function(){return true});
         weekCtrl = $controller('WeekCtrl', {
@@ -100,14 +100,15 @@ describe('Weeks Module', function () {
     // FILTERS
     it('should return the remaining total for the week', inject(function($filter) {
         var week = {
-            total: 200,
+            total: '200',
             transactions: [
-                10,
-                5.50,
-                30
+                '10',
+                '5.50',
+                '30',
+                '6.66'
             ]
         };
-        expect($filter('remainingTotal')(week)).toEqual(154.5);
+        expect($filter('remainingTotal')(week)).toEqual(147.84);
     }));
 
 });

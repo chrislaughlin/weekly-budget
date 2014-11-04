@@ -1,11 +1,12 @@
 <!-- Main Section -->
 <div ng-controller="WeeksCtrl as wsc">
     <p class="header">Weeks</p>
+
     <div class="weeks">
-        <ul>
-            <li ng-repeat="week in wsc.weeks">
-                <a ng-href="#week/{{$index}}">{{week.name}} Remaining: {{week | remainingTotal}}</a>
-            </li>
-        </ul>
+        <div ng-repeat="week in wsc.weeks">
+            <div class="week" ng-class-odd="'odd'" ng-class-even="'even'">
+                <a ng-href="#week/{{$index}}">{{week.name}} Left: {{week | remainingTotal}}</a>
+            </div>
+        </div>
     </div>
 </div>
