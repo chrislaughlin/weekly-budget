@@ -84,6 +84,16 @@ describe('Weeks Module', function () {
         expect(weekCtrl.tranaction).toEqual('');
     }));
 
+    it('should not add blank values', inject(function($controller) {
+        spyOn(service, 'addTransaction').and.callFake(function(){return true});
+        weekCtrl = $controller('WeekCtrl', {
+            '$scope': scope2,
+            '$routeParams': routeParams
+        });
+        weekCtrl.addTransaction('');
+        expect(service.addTransaction).not.toHaveBeenCalled();
+    }));
+
     // SERVICE
     it('should have Weeks Service', inject(function() {
         expect(service).toBeDefined();
