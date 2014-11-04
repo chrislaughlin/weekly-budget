@@ -39,6 +39,12 @@ describe('Weeks Module', function () {
         expect(weeksCtrl.weeks).toEqual(defaultWeeks);
     }));
 
+    it('should clear all data', function() {
+        spyOn(service, 'clearData').and.callFake(function(){return true});
+        weeksCtrl.clearData();
+        expect(service.clearData).toHaveBeenCalled();
+    })
+
     it('should have Week Controller', inject(function($controller) {
         spyOn(service, 'getWeek').and.returnValue(defaultWeeks[0]);
         weekCtrl = $controller('WeekCtrl', {
@@ -94,6 +100,7 @@ describe('Weeks Module', function () {
         expect(service.addTransaction).not.toHaveBeenCalled();
     }));
 
+
     // SERVICE
     it('should have Weeks Service', inject(function() {
         expect(service).toBeDefined();
@@ -123,6 +130,12 @@ describe('Weeks Module', function () {
         newWeeks[0].transactions.push(10);
         service.addTransaction(0, 10);
         expect(localStorageService.set).toHaveBeenCalledWith('weeks', newWeeks);
+    }));
+
+    it('should clear all data', inject(function(localStorageService) {
+        spyOn(localStorageService, 'clearAll');
+        service.clearData();
+        expect(localStorageService.clearAll).toHaveBeenCalled();
     }));
 
     // FILTERS

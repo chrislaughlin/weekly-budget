@@ -3,6 +3,9 @@
 function WeeksCtrl(Weeks) {
     this.weeks = [];
     this.weeks = Weeks.getWeeks();
+    this.clearData = function() {
+        Weeks.clearData();
+    }
 }
 
 function WeeksService(localStorageService) {
@@ -24,6 +27,9 @@ function WeeksService(localStorageService) {
         var weeks = this.getWeeks();
         weeks[index].transactions.push(transaction);
         localStorageService.set(_WEEKS, weeks);
+    };
+    WeeksService.clearData = function() {
+        localStorageService.clearAll();
     };
 
     return WeeksService;
@@ -50,7 +56,7 @@ function WeekCtrl(Weeks, $routeParams) {
             this.tranaction = '';
         }
 
-    }
+    };
 }
 
 function backButton() {
