@@ -42,7 +42,7 @@ function remainingTotal() {
         _.each(week.transactions, function(trans) {
             sum += parseFloat(trans);
         });
-        return week.total - sum;
+        return parseFloat(week.total - sum).toFixed(2);
     }
 }
 

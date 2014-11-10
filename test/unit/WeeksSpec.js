@@ -156,10 +156,10 @@ describe('Weeks Module', function () {
                 '10',
                 '5.50',
                 '30',
-                '6.66'
+                '6.66666'
             ]
         };
-        expect($filter('remainingTotal')(week)).toEqual(147.84);
+        expect($filter('remainingTotal')(week)).toEqual('147.83');
     }));
 
 });
